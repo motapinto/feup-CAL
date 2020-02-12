@@ -1,6 +1,6 @@
 # CAL
 
-> **2018/2019** - 3rd Year, 2st Semester
+> **2019/2020** - 3rd Year, 2st Semester
 >
 > **Course:** Concepção e Análise de Algoritmos: [CAL page in sigarra](https://sigarra.up.pt/feup/en/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=436441) | Algorithm Design and Analysis
 >
