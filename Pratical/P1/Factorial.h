@@ -1,8 +1,16 @@
-#pragma once
+/*
+ * Factorial.h
+ */
+
+#ifndef FACTORIAL_H_
+#define FACTORIAL_H_
+
 #include <iostream>
 
 // Calcula fatorial de forma recursiva
-int factorial(int n);
+int factorialRecurs(int n);
 
 //Calcula fatorial usando programação dinamica
-int factorialDinamic(int n);
+int factorialDinam(int n);
+
+#endif /* FACTORIAL_H_ */
