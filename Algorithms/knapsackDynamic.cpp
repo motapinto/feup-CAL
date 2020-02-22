@@ -8,7 +8,7 @@ using namespace std;
     val: values of each item
     n: number of items
 */
-int knapSack(int W, int wt[], int val[], int n) {
+int knapSack(int W, int val[], int wt[], int n) {
     int cost[W+1];
     int last[W+1];
 
@@ -31,9 +31,9 @@ int knapSack(int W, int wt[], int val[], int n) {
 }
 
 int main() { 
-    int val[] = {60, 100, 120}; 
-    int wt[] = {10, 20, 30}; 
-    int  W = 50; 
+    int  W = 17;
+    int val[] = {4, 5, 10, 11, 13}; 
+    int wt[] = {3, 4, 7, 8, 9};
     int n = sizeof(val)/sizeof(val[0]); 
-    cout << knapSack(W, wt, val, n) << endl;
+    cout << knapSack(W, val, wt, n) << endl;
 } 
