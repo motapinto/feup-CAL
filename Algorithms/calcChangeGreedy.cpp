@@ -9,7 +9,7 @@ vector<int> calcChangeGreedy(int valor, vector<int> coins, vector<int> stock) {
     vector<int> selected;
 
     if(coins.size() != stock.size()) {
-        return selected
+        return selected;
     }
 
     for (int i = coins.size() - 1; i >= 0 && montante > 0; i--) {
