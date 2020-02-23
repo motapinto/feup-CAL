@@ -8,7 +8,7 @@ string calcSum(int* sequence, int size)
 {
     int sum = 0, sumPrev = 0;
     int startIndex = 0;
-    string result = "";
+    string result;
 
     for(int m=1; m<=size; m++) {
         for(int i=0; i<=(size-m); i++) {

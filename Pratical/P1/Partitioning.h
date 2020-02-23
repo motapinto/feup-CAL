@@ -5,16 +5,21 @@
 #ifndef PARTITIONING_H_
 #define PARTITIONING_H_
 
-/*Implementa a fun��o s(n,k) usando recursividade*/
+#include <iostream>
+
+// S(n,k) = S(n-1, k-1) + kS(n-1, k), se 1<k<n
+// S(n,k) = 1, se k=1 ou k=n
+
+/*Implementa a função s(n,k) usando recursividade*/
 int s_recursive(int n,int k);
 
-/*Implementa a fun��o b(n) usando recursividade*/
+/*Implementa a função b(n) usando recursividade*/
 int b_recursive(int n);
 
-/*Implementa a fun��o s(n,k) usando programa��o din�mica*/
+/*Implementa a função s(n,k) usando programação dinâmica*/
 int s_dynamic(int n,int k);
 
-/*Implementa a fun��o b(n) usando programa��o din�mica*/
+/*Implementa a função b(n) usando programação dinâmica*/
 int b_dynamic(int n);
 
 #endif /* SUM_H_ */
