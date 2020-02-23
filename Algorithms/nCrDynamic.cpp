@@ -4,7 +4,7 @@ using namespace std;
 
 long long row[MAX + 1]; // initialized with 0's by default if declared globally
 
-int nCr(int n, int r) {
+int nCrDynamic(int n, int r) {
     int i, j;
 
     // initialize by the first row
@@ -23,5 +23,5 @@ int nCr(int n, int r) {
 }
 
 int main() {
-    nCr(5, 2);
+    nCrDynamic(5, 2);
 }
