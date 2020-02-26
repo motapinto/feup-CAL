@@ -21,7 +21,7 @@ string calcChange(int m, int numCoins, int *coinValues)
 
     for (int i = 0; i < numCoins; i++) {
         for (int k = 0; k <= m; k++) {
-            if ((coinValues[i] <= k) && ( minCoins[k] > minCoins[k - coinValues[i]] + 1 || minCoins[k] == 0)) {
+            if ((coinValues[i] <= k) && (minCoins[k] > minCoins[k - coinValues[i]] + 1 || minCoins[k] == 0)) {
                 // Updates new value
                 minCoins[k] = minCoins[k - coinValues[i]] + 1;
                 // Stores last coin
