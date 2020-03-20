@@ -21,7 +21,7 @@ class Vertex {
 	vector<Edge<T> > adj;  // list of outgoing edges
 	bool visited = false;  // auxiliary field used by dfs and bfs
 	int indegree = 0;      // auxiliary field used by topsort
-	bool processing;       // auxiliary field used by isDAG
+	bool processing = false;       // auxiliary field used by isDAG
 
 	void addEdge(Vertex<T> *dest, double w);
 	bool removeEdgeTo(Vertex<T> *d);
@@ -190,6 +190,8 @@ template <class T>
 vector<T> Graph<T>::dfs() const {
 	vector<T> res;
 
+    for(auto vertex : this->vertexSet) vertex->visited = false;
+
 	for(auto vertex : this->vertexSet) {
 	    if(!vertex->visited) {
 	        this->dfsVisit(vertex, res);
@@ -226,6 +228,8 @@ vector<T> Graph<T>::bfs(const T & source) const {
     vector<T> res;
     queue<Vertex<T>*> q;
 
+    for(auto vertex : this->vertexSet) vertex->visited = false;
+
     q.push(this->vertexSet.at(0));
     this->vertexSet.at(0)->visited = true;
 
@@ -257,12 +261,16 @@ vector<T> Graph<T>::topsort() const {
 	vector<T> res;
 	queue<Vertex<T>*> q;
 
+    for(auto vertex : this->vertexSet) vertex->indegree = 0;
+
+    // Calculates the intitial indegree for each vertice
 	for(auto vertex : this->vertexSet) {
         for(auto edge : vertex->adj) {
             edge.dest->indegree++;
         }
     }
 
+	// We start with vertices with indegree 0 and put them on the queue
 	for(auto vertex : this->vertexSet) {
 	    if(vertex->indegree == 0) {
 	        q.push(vertex);
@@ -270,10 +278,14 @@ vector<T> Graph<T>::topsort() const {
 	}
 
     while(!q.empty()) {
+        // we move the elements with indegree 0 and move them to the list(array)
         auto next = q.front();
         q.pop();
         res.push_back(next->info);
 
+        // until the queue is not empty repeat the process
+        // recalculate indegree for vertices linked with vertice next
+        // after recalculating putting them on the queue again
         for(auto edge : next->adj) {
             edge.dest->indegree--;
             if(edge.dest->indegree == 0) {
@@ -281,6 +293,7 @@ vector<T> Graph<T>::topsort() const {
             }
         }
     }
+    //if the size of the of res list != number of vertices on the graph -> the graph has cicles
 	return res.size() != vertexSet.size() ? vector<T>() : res;
 }
 
@@ -296,11 +309,36 @@ vector<T> Graph<T>::topsort() const {
 
 template <class T>
 int Graph<T>::maxNewChildren(const T & source, T &inf) const {
-	// TODO (28 lines, mostly reused)
-	return 0;
-}
+    vector<T> res;
+    queue<Vertex<T>*> q;
+    int max = 0;
 
-/****************** 3b) isDAG   (HOME WORK)  ********************/
+    // Starts at the source
+    auto vertex = findVertex(source);
+    q.push(vertex);
+    vertex->visited = true;
+
+    while(!q.empty()) {
+        auto next = q.front();
+        q.pop();
+        res.push_back(next->info);
+
+        int maxCur = 0;
+        for(auto edge : next->adj) {
+            if(!edge.dest->visited) {
+                q.push(edge.dest);
+                edge.dest->visited = true;
+                maxCur++;
+            }
+        }
+        if(maxCur > max) {
+            max = maxCur;
+            inf = next->info;
+        }
+    }
+
+    return max;
+}
 
 /*
  * Performs a depth-first search in a graph (this), to determine if the graph
@@ -312,9 +350,11 @@ int Graph<T>::maxNewChildren(const T & source, T &inf) const {
 
 template <class T>
 bool Graph<T>::isDAG() const {
-	// TODO (9 lines, mostly reused)
-	// HINT: use the auxiliary field "processing" to mark the vertices in the stack.
-	return true;
+    for(auto vertex : this->vertexSet) {
+        vertex->visited = false;
+        vertex->processing = false;
+    }
+    return dfsIsDAG(vertexSet.at(0));
 }
 
 /**
@@ -323,8 +363,17 @@ bool Graph<T>::isDAG() const {
  */
 template <class T>
 bool Graph<T>::dfsIsDAG(Vertex<T> *v) const {
-	// TODO (12 lines, mostly reused)
-	return true;
+	v->visited = true;
+
+    for(auto edge : v->adj) {
+        if(edge.dest->processing) return false;
+
+        else if(!edge.dest->visited) {
+            edge.dest->processing = true;
+            if(!dfsIsDAG(edge.dest)) return false;
+        }
+    }
+    return true;
 }
 
 #endif /* GRAPH_H_ */
