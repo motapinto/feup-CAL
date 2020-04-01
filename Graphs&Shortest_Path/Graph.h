@@ -377,5 +377,4 @@ vector<T> Graph<T>::getfloydWarshallPath(const T &orig, const T &dest) const{
 	return res;
 }
 
-
 #endif /* GRAPH_H_ */
