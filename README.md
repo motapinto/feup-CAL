@@ -5,7 +5,7 @@
 
 |Project Name|Description|
 |:----------:|:---------:|
-|[Meat Wagons](https://https://github.com/motapinto/meat-wagons)|Project that tackles graphs, shortest paths and travel salesman problem|
+|[Meat Wagons](https://github.com/motapinto/meat-wagons)|Project that tackles graphs, shortest paths and travel salesman problem|
 
 > **Project developed by:**
 > - [Martim Silva](https://github.com/motapinto) 
